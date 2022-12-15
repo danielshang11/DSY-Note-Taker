@@ -17,7 +17,6 @@ apiRouter.get('/notes',(req,res)=> {
         res.json(JSON.parse(data));
         console.log(JSON.parse(data))
     })
-    return res;
 })
 
 apiRouter.post('/notes',(req,res)=>{
@@ -36,7 +35,7 @@ apiRouter.post('/notes',(req,res)=>{
 });
 
 apiRouter.delete('/notes/:id',(req,res)=>{
-    const id = request.params.id;
+    const id = req.params.id;
   
     fs.readFile(path.join(__dirname, '..','db','db.json'), (err, data) => {
         if (err) throw err;
@@ -45,7 +44,7 @@ apiRouter.delete('/notes/:id',(req,res)=>{
 
         fs.writeFile(path.join(__dirname, '..','db','db.json'), JSON.stringify(filterNotes), (err, data) => {
         if (err) throw err;
-        response.json(data)
+        res.json(data)
         console.log("Deleted!")
         })
   })
